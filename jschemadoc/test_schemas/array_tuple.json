@@ -1,0 +1,16 @@
+{
+    "title": "array_tuple",
+    "description": "Example schema description.",
+    "type": "array",
+    "items": [
+	    {
+			"type": "number"
+	    },
+	    {
+			"type": "string"
+	    },
+	    {
+	    	"type": "boolean"
+	    }
+  	]
+}

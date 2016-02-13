@@ -1,0 +1,5 @@
+{
+    "title": "boolean",
+    "description": "Example schema description.",
+    "type": "boolean"
+}

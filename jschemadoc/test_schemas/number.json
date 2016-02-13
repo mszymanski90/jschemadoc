@@ -1,0 +1,9 @@
+{
+    "title": "number",
+    "description": "Example schema description.",
+    "type": "number",
+    "minimum": 3,
+    "maximum": 10,
+    "exclusiveMinimum": true,
+    "exclusiveMaximum": false
+}

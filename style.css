@@ -1,0 +1,29 @@
+body {
+    font-family: sans-serif;
+}
+div.root_docs {
+    display: none;
+}
+div.name {
+    display: inline;
+}
+div.type {
+    display: inline;
+    font-weight: bold;
+    color: blue;
+}
+div.required {
+    display: inline;
+    font-weight: bold;
+}
+div.docs {
+    display: block;
+}
+div.title {
+    display: inline;
+}
+div.description {
+    display: inline;
+    font-family: serif;
+    font-style: italic;
+}

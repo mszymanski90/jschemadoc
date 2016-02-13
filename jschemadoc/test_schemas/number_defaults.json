@@ -1,0 +1,5 @@
+{
+    "title": "number_defaults",
+    "description": "Example schema description.",
+    "type": "number"
+}

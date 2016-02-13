@@ -1,0 +1,15 @@
+{
+    "title": "simple_object",
+    "description": "Example schema description.",
+    "type": "object",
+    "properties": {
+        "firstName": {
+            "type": "string"
+        },
+        "lastName": {
+            "description": "Last name",
+            "type": "string"
+        }
+    },
+    "required": ["firstName"]
+}

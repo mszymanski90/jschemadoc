@@ -1,0 +1,9 @@
+{
+    "title": "array_list",
+    "description": "Example schema description.",
+    "type": "array",
+    "items": null,
+    "minItems": 1,
+    "maxItems": 10,
+    "uniqueItems": false
+}
