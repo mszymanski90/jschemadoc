@@ -19,32 +19,31 @@
 
 """Generates documentation from JSON Schema"""
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 import argparse
 
-import jschemadoc
-import html_output
-import wiki_output
+from jschemadoc import docsmodel
+from jschemadoc import html_output
+from jschemadoc import wiki_output
 
 
 if __name__ == '__main__':
     output_generators = {
-            'html': html_output.HtmlOutput,
-            'wiki': wiki_output.WikiOutput
-            }
+        'html': html_output.HtmlOutput,
+        'wiki': wiki_output.WikiOutput
+    }
 
     parser = argparse.ArgumentParser(
-            description='JSchemaDoc generates documentation from JSON Schema file')
+        description='JSchemaDoc generates documentation from JSON Schema file')
     parser.add_argument('schema', help='JSON Schema input')
-    parser.add_argument('output_type', choices=output_generators.keys(),
-            help='Output type')
+    parser.add_argument('output_type', choices=output_generators.keys(), help='Output type')
     parser.add_argument('output', help='Output file')
     parser.add_argument('-V', '--version', action='version', version='{}'.format(__version__))
     args = parser.parse_args()
 
-    schema = jschemadoc.get_schema_from_file(args.schema)
-    parsed_items = jschemadoc.DocsModel().parse(schema)
+    schema = docsmodel.get_schema_from_file(args.schema)
+    parsed_items = docsmodel.DocsModel().parse(schema)
 
     output_generator = output_generators[args.output_type]()
     output = output_generator.generate_output(parsed_items)
