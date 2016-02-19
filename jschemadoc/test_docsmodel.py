@@ -23,6 +23,7 @@
 import unittest
 
 import docsmodel
+import pprint
 
 
 class TestParsedItem(unittest.TestCase):
@@ -434,6 +435,30 @@ class TestDocsModelBT_array_tuple(unittest.TestCase):
         self.assertEqual(good_entries[0], entries[1])
         self.assertEqual(good_entries[1], entries[2])
         self.assertEqual(good_entries[2], entries[3])
+
+
+class TestDocsModelBT_enum_schema(unittest.TestCase):
+    """Tests for enum keyword."""
+
+    def setUp(self):
+        """Tests set up."""
+        self.docs_model = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
+            'test_schemas/enum.json')
+
+    def test_root_enum_entry(self):
+        entries = self.docs_model.parse(self.schema)
+        good_entry = docsmodel.ParsedItem(
+            {
+                'title': 'enum',
+                'description': 'Example schema description.',
+                'type': None
+            },
+            'root',
+            True,
+            0)
+        good_entry['enum'] = ['item1', 2]
+        self.assertEqual(good_entry, entries[0])
 
 
 # class TestDocsModelBT_multilevel_schemas(unittest.TestCase):
