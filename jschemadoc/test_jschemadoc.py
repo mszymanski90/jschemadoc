@@ -1,4 +1,4 @@
-# JSchemaDoc library and tool for generating documentation from JSON Schemas.
+# jschemadoc library and tool for generating documentation from JSON Schemas.
 # Copyright (C) 2015  Maciej Szymański
 #
 # This library is free software; you can redistribute it and/or
@@ -17,12 +17,12 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-"""Tests for jschemadoc"""
+"""Tests for docsmodel"""
 
 
 import unittest
 
-import jschemadoc
+import docsmodel
 
 
 class TestParsedItem(unittest.TestCase):
@@ -33,7 +33,7 @@ class TestParsedItem(unittest.TestCase):
             'title': 'test_title',
             'type': 'test_type',
             'description': 'test_desc'}
-        self.pi = jschemadoc.ParsedItem(json_obj, 'test_name', True, 0)
+        self.pi = docsmodel.ParsedItem(json_obj, 'test_name', True, 0)
 
     def test_is_dict(self):
         self.assertIsInstance(self.pi, dict)
@@ -67,14 +67,14 @@ schema_to_array_items_type = {
 class TestDocsModelBT_simple_object(unittest.TestCase):
 
     def setUp(self):
-        self.dm = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.dm = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
                 'test_schemas/simple_object.json')
         self.parsed_items = self.dm.parse(self.schema)
 
     def test_root_element(self):
         """Tests if root entry is generated correctly."""
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {
                 'title': 'simple_object',
                 'type': 'object',
@@ -86,7 +86,7 @@ class TestDocsModelBT_simple_object(unittest.TestCase):
         self.assertEqual(self.parsed_items[0], item)
 
     def test_first_name(self):
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {'title': '', 'type': 'string', 'description': ''},
             'firstName',
             True,
@@ -98,7 +98,7 @@ class TestDocsModelBT_simple_object(unittest.TestCase):
         self.assertEqual(self.parsed_items[1], item)
 
     def test_last_name(self):
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {'title': '', 'type': 'string', 'description': 'Last name'},
             'lastName',
             False,
@@ -113,8 +113,8 @@ class TestDocsModelBT_simple_object(unittest.TestCase):
 class TestDocsModelBT_boolean(unittest.TestCase):
 
     def setUp(self):
-        self.dm = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.dm = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
             'test_schemas/boolean.json')
         self.parsed_items = self.dm.parse(self.schema)
 
@@ -122,7 +122,7 @@ class TestDocsModelBT_boolean(unittest.TestCase):
         self.assertEqual(len(self.parsed_items), 1)
 
     def test_boolean(self):
-        pi = jschemadoc.ParsedItem(
+        pi = docsmodel.ParsedItem(
             {
                 'title': 'boolean',
                 'description': 'Example schema description.',
@@ -137,8 +137,8 @@ class TestDocsModelBT_boolean(unittest.TestCase):
 class TestDocsModelBT_integer(unittest.TestCase):
 
     def setUp(self):
-        self.docs_model = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.docs_model = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
             'test_schemas/integer.json')
         self.parsed_items = self.docs_model.parse(self.schema)
 
@@ -146,7 +146,7 @@ class TestDocsModelBT_integer(unittest.TestCase):
         self.assertEqual(len(self.parsed_items), 1)
 
     def test_integer(self):
-        pi = jschemadoc.ParsedItem(
+        pi = docsmodel.ParsedItem(
             {
                 'title': 'integer',
                 'type': 'integer',
@@ -166,8 +166,8 @@ class TestDocsModelBT_number(unittest.TestCase):
     """Tests parsing of number schema"""
 
     def setUp(self):
-        self.dm = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.dm = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
                 'test_schemas/number.json')
         self.parsed_items = self.dm.parse(self.schema)
 
@@ -175,7 +175,7 @@ class TestDocsModelBT_number(unittest.TestCase):
         self.assertEqual(len(self.parsed_items), 1)
 
     def test_number(self):
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {
                 'title': 'number',
                 'type': 'number',
@@ -195,8 +195,8 @@ class TestDocsModelBT_number_defaults(unittest.TestCase):
     """Tests parsing of number schema defaults"""
 
     def setUp(self):
-        self.dm = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.dm = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
                 'test_schemas/number_defaults.json')
         self.parsed_items = self.dm.parse(self.schema)
 
@@ -204,7 +204,7 @@ class TestDocsModelBT_number_defaults(unittest.TestCase):
         self.assertEqual(len(self.parsed_items), 1)
 
     def test_number(self):
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {
                 'title': 'number_defaults',
                 'type': 'number',
@@ -224,8 +224,8 @@ class TestDocsModelBT_null(unittest.TestCase):
     """Tests schema of type null."""
 
     def setUp(self):
-        self.dm = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.dm = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
                 'test_schemas/null.json')
         self.parsed_items = self.dm.parse(self.schema)
 
@@ -234,7 +234,7 @@ class TestDocsModelBT_null(unittest.TestCase):
 
     def test_null(self):
         """Tests null schema parsing."""
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {
                 'title': 'null',
                 'type': 'null',
@@ -249,8 +249,8 @@ class TestDocsModelBT_null(unittest.TestCase):
 class TestDocsModelBTString(unittest.TestCase):
 
     def setUp(self):
-        self.docs_model = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.docs_model = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
             'test_schemas/string.json')
         self.parsed_items = self.docs_model.parse(self.schema)
 
@@ -260,7 +260,7 @@ class TestDocsModelBTString(unittest.TestCase):
 
     def test_string(self):
         """Tests parsing string schema model"""
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {
                 'title': 'string',
                 'type': 'string',
@@ -282,8 +282,8 @@ class TestDocsModelBTStringDefaults(unittest.TestCase):
     """
 
     def setUp(self):
-        self.docs_model = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.docs_model = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
             'test_schemas/string_defaults.json')
         self.parsed_items = self.docs_model.parse(self.schema)
 
@@ -293,7 +293,7 @@ class TestDocsModelBTStringDefaults(unittest.TestCase):
 
     def test_string(self):
         """Tests parsing string schema model"""
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {
                 'title': 'string_defaults',
                 'type': 'string',
@@ -312,15 +312,15 @@ class TestDocsModelBTStringDefaults(unittest.TestCase):
 class TestDocsModelBT_array_list(unittest.TestCase):
 
     def setUp(self):
-        self.docs_model = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.docs_model = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
             'test_schemas/array_list.json')
 
     def test_exactly_one_entry_is_generated(self):
         """Test if one entry is generated"""
         for schema_name, expected_number in basic_type_schemas_PI_count.items():
             schema = self.schema
-            schema['items'] = jschemadoc.get_schema_from_file(
+            schema['items'] = docsmodel.get_schema_from_file(
                 'test_schemas/' + schema_name + '.json')
             parsed_items = self.docs_model.parse(schema)
             self.assertTrue(
@@ -331,7 +331,7 @@ class TestDocsModelBT_array_list(unittest.TestCase):
     def test_array_root(self):
         schema = self.schema
         parsed_items = self.docs_model.parse(schema)
-        item = jschemadoc.ParsedItem(
+        item = docsmodel.ParsedItem(
             {
                 'title': 'array_list',
                 'type': 'array',
@@ -350,7 +350,7 @@ class TestDocsModelBT_array_list(unittest.TestCase):
         """Checks if array entries match schema"""
         for schema_name, expected_type in schema_to_array_items_type.items():
             schema = self.schema
-            schema['items'] = jschemadoc.get_schema_from_file(
+            schema['items'] = docsmodel.get_schema_from_file(
                 'test_schemas/' + schema_name + '.json')
             parsed_items = self.docs_model.parse(schema)
             self.assertTrue(expected_type == parsed_items[1]['type'])
@@ -361,8 +361,8 @@ class TestDocsModelBT_array_tuple(unittest.TestCase):
 
     def setUp(self):
         """Tests set up."""
-        self.docs_model = jschemadoc.DocsModel()
-        self.schema = jschemadoc.get_schema_from_file(
+        self.docs_model = docsmodel.DocsModel()
+        self.schema = docsmodel.get_schema_from_file(
             'test_schemas/array_tuple.json')
 
     def test_entries_count(self):
@@ -374,7 +374,7 @@ class TestDocsModelBT_array_tuple(unittest.TestCase):
         """Tests array tuple root element."""
         entries = self.docs_model.parse(self.schema)
         root_entry = entries[0]
-        good_root = jschemadoc.ParsedItem(
+        good_root = docsmodel.ParsedItem(
             {
                 "title": "array_tuple",
                 "description": "Example schema description.",
@@ -393,7 +393,7 @@ class TestDocsModelBT_array_tuple(unittest.TestCase):
         # TODO: test for required field
         entries = self.docs_model.parse(self.schema)
         good_entries = list()
-        good_entries.append(jschemadoc.ParsedItem(
+        good_entries.append(docsmodel.ParsedItem(
             {
                 'title': '',
                 'description': '',
@@ -407,7 +407,7 @@ class TestDocsModelBT_array_tuple(unittest.TestCase):
         good_entries[0]['exclusiveMinimum'] = False
         good_entries[0]['exclusiveMaximum'] = False
 
-        good_entries.append(jschemadoc.ParsedItem(
+        good_entries.append(docsmodel.ParsedItem(
             {
                 'title': '',
                 'description': '',
@@ -421,7 +421,7 @@ class TestDocsModelBT_array_tuple(unittest.TestCase):
         good_entries[1]['pattern'] = None
         good_entries[1]['format'] = None
 
-        good_entries.append(jschemadoc.ParsedItem(
+        good_entries.append(docsmodel.ParsedItem(
             {
                 'title': '',
                 'description': '',
