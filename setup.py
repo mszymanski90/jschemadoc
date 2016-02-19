@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='jschemadoc',
     packages=['jschemadoc'],
-    version='0.1.1',
+    version='0.2.0',
     description='JSON Schema documentation generator.',
     author='Maciej Szymański',
     author_email='mszymanski90@gmail.com',
