@@ -41,7 +41,7 @@ class ParsedItem(dict):
         self['level'] = level
         self['required'] = required
 
-    def __repr__(self):
+    def block__repr__(self):
         return '{} [{}] {}'.format(self['name'], self['type'], self['level'])
 
 
@@ -67,6 +67,8 @@ class DocsModel:
         self.__parsed_items.append(parsed_item)
         required = schema.get('required', [])
 
+        if 'enum' in schema:
+            parsed_item['enum'] = schema.get('enum')
         item_type = schema.get('type')
         if item_type == 'object':
             self.__parse_object(parsed_item, schema, required, level)
