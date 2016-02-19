@@ -1,0 +1,5 @@
+{
+    "title": "enum",
+    "description": "Example schema description.",
+    "enum": ["item1", 2]
+}
